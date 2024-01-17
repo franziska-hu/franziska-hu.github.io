@@ -1,0 +1,24 @@
+body{
+    overflow:hidden;
+    margin:0;
+    position: relative; /* button__wrapper */
+    z-index: 0;
+}
+
+.button__wrapper {
+    position: absolute; /* body */
+    right: 10px;
+    top: 10px;
+    z-index: 10;
+    display: flex;
+}
+
+.button {
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    color: black;
+    font-size: 16px;
+    height: 30px;
+    margin-left: 10px;
+}

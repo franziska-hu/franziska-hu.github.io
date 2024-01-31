@@ -1,24 +1,432 @@
-body{
-    overflow:hidden;
+:root {
+    --footer-height: 60px;
+}
+
+[data-theme="light"] {
+    --color-highlight-red: #CC4747;
+    --color-highlight-green: #488234;
+    --color-text: #2D2D2D;
+    --color-background: #fff;
+    --color-background-overlay: rgba(255, 255, 255, .9);
+    --color-outline: #959595;
+    --color-button: #fff;
+    --color-primary: #087A87;
+}
+
+[data-theme="dark"] {
+    --color-highlight-red: #F75757;
+    --color-highlight-green: #78D95B;
+    --color-text: #fff;
+    --color-background: #2D2D2D;
+    --color-background-overlay: rgba(45, 45, 45, .9);
+    --color-outline: #D7D7D7;
+    --color-button: #414141;
+    --color-primary: #0BADBF;
+}
+
+/**************************************************************************************************************/
+/**********************************           Common             **********************************************/
+/**************************************************************************************************************/
+
+body {
+    color: var(--color-text);
+    font-family: sans-serif;
+    font-size: 16px;
     margin:0;
     position: relative; /* button__wrapper */
     z-index: 0;
 }
 
+h1 {
+    opacity: 0;
+    position: absolute;
+}
+
+svg {
+    fill: currentColor;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 15px;
+}
+
+.highlight--green {
+    color: var(--color-highlight-green);
+}
+
+.highlight--red {
+    color: var(--color-highlight-red);
+}
+
+/**************************************************************************************************************/
+/**********************************    Controls, Button Toggle   **********************************************/
+/**************************************************************************************************************/
+
 .button__wrapper {
-    position: absolute; /* body */
-    right: 10px;
-    top: 10px;
-    z-index: 10;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute; /* body */
+    right: 0;
+    top: 0;
+    left: 0;
+    height: 40px;
+    z-index: 10;
+    padding: 0 20px;
+    background-color: var(--color-background);
+}
+
+.button-toggle-wrapper-dummy {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 20px;
+}
+
+.button-toggle-wrapper input {
+    opacity: 0;
+    clip: rect(0, 0, 0, 0);
+}
+
+.button-toggle-wrapper label,
+.darkmode-label-dummy  {
+    position: relative;
+    margin-right: 45px;
+}
+
+.button-toggle-wrapper label::after,
+.darkmode-label-dummy::after {
+    content: "";
+    position: absolute;
+    height: 20px;
+    width: 40px;
+    background-color: #E7E7E7;
+    border: solid 1px #AEAEAE;
+    border-radius: 10px;
+    top: 50%;
+    right: 0px;
+    transform: translate(45px, -50%);
+}
+
+.button-toggle-wrapper label::before,
+.darkmode-label-dummy::before {
+    content: "";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    background-color: var(--color-background);
+    border: solid 1px #D9D9D9;
+    border-radius: 50%;
+    top: 50%;
+    right: 0px;
+    transform: translate(23px, -50%);
+    transition: transform .3s ease-in-out;
+    z-index: 10;
+}
+
+.button-toggle-wrapper input:checked + label::before {
+    transform: translate(43px, -50%);
 }
 
 .button {
-    background-color: white;
+    background-color: var(--color-button);
     border-radius: 5px;
-    border: 1px solid black;
-    color: black;
+    border: 1px solid var(--color-text);
+    color: var(--color-text);
     font-size: 16px;
     height: 30px;
     margin-left: 10px;
 }
+
+/**************************************************************************************************************/
+/**********************************           Overlay            **********************************************/
+/**************************************************************************************************************/
+
+.overlay {
+    background-color: var(--color-background-overlay);
+    bottom: 0;
+    display: none;
+    left: 0;
+    overflow-y: scroll;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 15;
+}
+
+.overlay.open {
+    display: block;
+}
+
+.overlay h3 {
+    margin: 20px 0 5px;
+}
+
+.overlay ul {
+    padding: 0;
+    margin: 0;
+}
+
+.overlay li {
+    list-style: none;
+}
+
+.overlay__header {
+    background-color: var(--color-background);
+    padding: 30px 20px;
+    position: relative; /* overlay__header-close-button */
+}
+
+.overlay__header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 5px;
+}
+
+.overlay__header-close-button {
+    background-color: transparent;
+    border-color: transparent;
+    padding: 0;
+    position: absolute; /* overlay__header */
+    right: 20px;
+    top: 20px;
+}
+
+.overlay__header-close-button svg {
+    fill: var(--color-text);
+    height: 38px;
+    width: 38px;
+}
+
+.overlay__content {
+    margin-bottom: var(--footer-height);
+    padding: 10px 20px 20px;
+}
+
+/**********************************  Detail Page  **********************************************/
+
+.overlay__content-meta-info {
+    display: flex;
+    justify-content: center;
+}
+
+.overlay__content-meta-info li {
+    margin: 0 10px;
+    position: relative;
+}
+
+.overlay__content-meta-info li:not(:last-child)::after {
+    background-color: var(--color-text);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 5px;
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 5px;
+}
+
+.overlay__content-lines-wrapper {
+    display: flex;
+}
+
+.overlay__content-lines-wrapper li {
+    align-items: center;
+    border: 1px solid var(--color-text);
+    display: flex;
+    height: 25px;
+    justify-content: center;
+    margin-right: 10px;
+    width: 25px;
+}
+
+.overlay__content-departures,
+.overlay__content-detour {
+    max-width: 500px;
+}
+
+ul.overlay__content-departures-wrapper,
+ul.overlay__content-detour-wrapper {
+    border-radius: 5px;
+    border: 1px solid var(--color-outline);
+    padding: 0 10px;
+}
+
+.overlay__content-departures-wrapper li,
+.overlay__content-detour-wrapper li {
+    border-bottom: 1px solid var(--color-outline);
+    padding: 10px 0;
+}
+
+.overlay__content-departures-wrapper li:last-child,
+.overlay__content-detour-wrapper li:last-child {
+    border: none;
+}
+
+.overlay_content-depatures-header {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0 5px;
+    align-items: center;
+}
+
+.overlay .overlay_content-depatures-header h3 {
+    margin: 0;
+}
+
+.live-hint {
+    padding: 5px;
+    color: white;
+    background-color: var(--color-highlight-red);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.live-hint svg {
+    margin-left: 5px;
+}
+
+.overlay__content-departures-info {
+    display: flex;
+    font-weight: 600;
+    justify-content: space-between;
+}
+
+.overlay__content-departures-detail-info,
+.overlay__content-detour-type,
+.overlay__content-detour-info {
+    font-size: 14px;
+}
+
+.overlay__content-detour-type {
+    color: var(--color-highlight-red);
+}
+
+.overlay__content-detour-line {
+    font-weight: 600;
+}
+
+.overlay__content-detour-info div {
+    margin-top: 10px;
+}
+
+/**********************************  Tutorial Overlay  **********************************************/
+
+.tutorial-slider__permission-location,
+.tutorial-slider__permission-camera {
+    padding: 4px;
+    border: 2px solid var(--color-highlight-red);
+    color: var(--color-highlight-red);
+    border-radius: 5px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.tutorial-slider__permission-location .icon svg,
+.tutorial-slider__permission-camera .icon svg {
+    margin-right: 5px;
+}
+
+.tutorial-slider__permission-location .icon svg:last-child,
+.tutorial-slider__permission-camera .icon svg:last-child {
+    display: none;
+}
+
+.tutorial-slider__permission-location.permission-granted .icon svg:last-child,
+.tutorial-slider__permission-camera.permission-granted .icon svg:last-child {
+    display: block;
+}
+
+.tutorial-slider__permission-location.permission-granted .icon svg:first-child,
+.tutorial-slider__permission-camera.permission-granted .icon svg:first-child {
+    display: none;
+}
+
+.tutorial-slider__permission-location.permission-granted,
+.tutorial-slider__permission-camera.permission-granted {
+    border-color: var(--color-highlight-green);
+    color: var(--color-highlight-green);
+}
+
+/**************************************************************************************************************/
+/**********************************       Tutorial-Slider      ************************************************/
+/**************************************************************************************************************/
+
+.overlay__content.swiper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: 88px 0 0;
+}
+
+.slide-item__headline {
+    text-align: center;
+    margin: 0 20px;
+}
+
+.slide-item ol {
+    counter-reset: step-counter;
+    padding: 0 20px;
+}
+
+.slide-item ol li {
+    counter-increment: step-counter;
+    position: relative;
+    padding-left: 40px;
+    margin-bottom: 20px;
+}
+
+.slide-item ol li::before {
+    content: counter(step-counter);
+    position: absolute;
+    left: 0;
+    width: 26px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    text-align: center;
+    height: 22px;
+    padding-top: 4px;
+}
+
+.slider-control-wrapper {
+    position: absolute;
+    background-color: var(--color-background);
+    height: 80px;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.slider-control-wrapper .tutorial-slider-button::after {
+    content: none;
+}
+
+.slider-control-wrapper .tutorial-slider-button {
+    height: 35px;
+    width: 100px;
+    justify-content: left;
+}
+
+.slider-control-wrapper .tutorial-slider-button.swiper-button-next {
+    justify-content: right;
+}
+
+.slider-control-wrapper .swiper-button-prev svg {
+    transform: rotate(180deg);
+}
+
+.slider-control-wrapper .tutorial-slider-button svg {
+    width: 35px;
+    height: 35px;
+    fill: var(--color-text);
+}
+

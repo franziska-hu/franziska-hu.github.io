@@ -111,90 +111,18 @@ function success(pos) {
   const crd = pos.coords;
   const locationInfo = document.querySelector(".location-information");
 
-  locationInfo.innerHTML = "Accuracy: " + crd.accuracy;
+  locationInfo.innerHTML = "Accuracy: " + crd.accuracy + " <br> " + "Lng: " + crd.longitude + " <br> " + "Lat: " + crd.latitude;
 
+  /*
   console.log('____________________________________________');
   console.log('Latitude: ' + crd.latitude);
   console.log('Longitude: ' + crd.longitude);
-  console.log('Accuracy :' + crd.accuracy);
+  console.log('Accuracy :' + crd.accuracy);*/
 }
 
 function error(err) {
   console.error(`ERROR(${err.code}): ${err.message}`);
 }
-
-
-/**************************************************************************************************************/
-/**********************************            Main              **********************************************/
-/**************************************************************************************************************/
-
-let permissionLocation = false;
-let permissionCamera = false;
-
-window.addEventListener("DOMContentLoaded", (event) => {
-
-  checkLocationCameraPermission();
-
-  let overlays = document.querySelectorAll('.overlay');
-
-  overlays.forEach(overlay => {
-    let closeButton = overlay.querySelector('.overlay__header-close-button');
-
-    closeButton.addEventListener('click', function() {
-      overlay.classList.remove('open');
-    });
-  });
-
-  checkTheme();
-
-  let toggleButtonDarkMode = document.querySelector('.darkmode-toggle');
-
-  if (localStorage.getItem("theme") === "dark") {
-    toggleButtonDarkMode.checked = true;
-  } else {
-    toggleButtonDarkMode.checked = false;
-  }
-
-  toggleButtonDarkMode.addEventListener('click', function(event) {
-    if (event.target.checked === true) {
-      switchTheme("dark");
-    } else {
-      switchTheme("light");
-    }
-  });
-
-  let tutorialButton = document.querySelector('.button-tutorial');
-
-  tutorialButton.addEventListener('click', function() {
-      document.querySelector('.overlay--tutorial').classList.add('open');
-  });
-
-  if ("geolocation" in navigator) {
-    permissionLocation = true;
-
-    navigator.geolocation.getCurrentPosition((position) => {
-      console.log('Latitude: ' + position.coords.latitude);
-      console.log('Longitude: ' + position.coords.longitude);
-      let distance = getDistanceFromLatLon(position.coords.latitude, position.coords.longitude, 51.034958, 13.80067);
-      console.log(distance);
-    });
-  } else {
-    console.log('Geolocation not available');
-  }
-
-
-  initTutorialSlider();
-
-  options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0,
-  };
-
-  // let location = navigator.geolocation.watchPosition(success, error, options);
-
-  console.log(location);
-});
 
 /**************************************************************************************************************/
 /**********************************        AR Infoboxen          **********************************************/
@@ -297,15 +225,106 @@ function createInfoBox(dataBoxes) {
             >
             </a-box>
 
+            <div class="overlay">
+            <div class="overlay__header">
+              <h2>${stopName}</h2>
+              <div class="overlay__header-platform">${platformNumber}</div>
+    
+              <button type="button" class="overlay__header-close-button">
+                <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg>
+              </button>
+            </div>
+    
+            <div class="overlay__content">
+              
+            </div>
+          </div>
+
           </a-text>
         </a-entity>`
 
       scene.insertAdjacentHTML('beforeend', box);
     })
   })
+
+  // add overlay button Listener
+
+  let overlays = document.querySelectorAll('.overlay');
+
+  overlays.forEach(overlay => {
+    let closeButton = overlay.querySelector('.overlay__header-close-button');
+
+    closeButton.addEventListener('click', function() {
+      overlay.classList.remove('open');
+    });
+  });
 }
 
-fetch('./data.json')
-    .then((response) => response.json())
-    .then((json) => createInfoBox(json));
+/**************************************************************************************************************/
+/**********************************            Main              **********************************************/
+/**************************************************************************************************************/
+
+let permissionLocation = false;
+let permissionCamera = false;
+
+window.addEventListener("DOMContentLoaded", (event) => {
+
+  checkLocationCameraPermission();
+
+  fetch('./data.json')
+  .then((response) => response.json())
+  .then((json) => createInfoBox(json));
+
+  checkTheme();
+
+  let toggleButtonDarkMode = document.querySelector('.darkmode-toggle');
+
+  if (localStorage.getItem("theme") === "dark") {
+    toggleButtonDarkMode.checked = true;
+  } else {
+    toggleButtonDarkMode.checked = false;
+  }
+
+  toggleButtonDarkMode.addEventListener('click', function(event) {
+    if (event.target.checked === true) {
+      switchTheme("dark");
+    } else {
+      switchTheme("light");
+    }
+  });
+
+  let tutorialButton = document.querySelector('.button-tutorial');
+
+  tutorialButton.addEventListener('click', function() {
+      document.querySelector('.overlay--tutorial').classList.add('open');
+  });
+
+  if ("geolocation" in navigator) {
+    permissionLocation = true;
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log('Latitude: ' + position.coords.latitude);
+      console.log('Longitude: ' + position.coords.longitude);
+      let distance = getDistanceFromLatLon(position.coords.latitude, position.coords.longitude, 51.034958, 13.80067);
+      console.log(distance);
+    });
+  } else {
+    console.log('Geolocation not available');
+  }
+
+
+  initTutorialSlider();
+
+  options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0,
+  };
+
+  let location = navigator.geolocation.watchPosition(success, error, options);
+
+  console.log(location);
+});
+
+
 

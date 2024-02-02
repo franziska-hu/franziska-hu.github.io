@@ -312,7 +312,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log('Geolocation not available');
   }
 
-
   initTutorialSlider();
 
   options = {

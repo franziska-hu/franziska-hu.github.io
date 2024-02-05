@@ -151,7 +151,7 @@ function createInfoBox(dataBoxes) {
           cursor="fuse: false; rayOrigin: mouse;">
           <a-text
             value="${stopName}"
-            text="align: right; width: 3; color: black;"
+            text="align: right; width: 10; color: black;"
             font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
             look-at="[user-camera]"
             scale="2 2 2"
@@ -219,8 +219,8 @@ function createInfoBox(dataBoxes) {
               transparent="true"
               opacity="0.9"
               position="0 -0.7 -1"
-              width="2.6"
-              height="2"
+              width="12"
+              height="10"
               cursor-listener
             >
             </a-box>

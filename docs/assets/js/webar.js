@@ -29,6 +29,18 @@ function getDistanceFromLatLon(latitude1, longitude1, latitude2, longitude2) {
 function switchTheme(theme) {
   document.querySelector('html').setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
+
+  let infoboxes = document.querySelectorAll("a-box");
+
+  if (theme === 'dark') {
+    infoboxes.forEach(box => {
+      box.setAttribute('color', '#000');
+    });
+  } else {
+    infoboxes.forEach(box => {
+      box.setAttribute('color', '#fff');
+    });
+  }
 }
 
 function checkTheme() {
@@ -85,12 +97,12 @@ function checkLocationCameraPermission() {
     console.log('Geolocation not available');
   }
 
+  /*
   navigator.mediaDevices
     .getUserMedia({
       video: true,
     })
     .then((stream) => {
-      console.log(stream);
       permissionCamera = true;
       let cameraHint = document.querySelector('.tutorial-slider__permission-camera');
       cameraHint.classList.add('permission-granted');
@@ -100,7 +112,7 @@ function checkLocationCameraPermission() {
       if (err.name == "NotAllowedError" || err.name == "PermissionDeniedError") {
         console.log('Permission Camera not granted');
       }
-  });
+  });*/
 }
 
 /**************************************************************************************************************/
@@ -111,7 +123,7 @@ function success(pos) {
   const crd = pos.coords;
   const locationInfo = document.querySelector(".location-information");
 
-  locationInfo.innerHTML = "Accuracy: " + crd.accuracy + " <br> " + "Lng: " + crd.longitude + " <br> " + "Lat: " + crd.latitude;
+  locationInfo.innerHTML = "Accuracy: " + crd.accuracy + " <br> " + "Lng: " + crd.longitude + " " + "Lat: " + crd.latitude;
 
   /*
   console.log('____________________________________________');
@@ -132,7 +144,6 @@ function createInfoBox(dataBoxes) {
   let stops = dataBoxes.data.dmDepartures;
 
   stops.forEach(stop => {
-    console.log(stop);
     const stopName = stop.name;
     const platforms = stop.platforms;
 
@@ -141,7 +152,7 @@ function createInfoBox(dataBoxes) {
       const latitude = platform.lat;
       const longitude = platform.lng;
 
-      console.log(stopName + " " + platformNumber + " " + latitude + " " + longitude);
+      // console.log(stopName + " " + platformNumber + " " + latitude + " " + longitude);
 
       let scene = document.querySelector('a-scene');
       let box = `
@@ -149,78 +160,80 @@ function createInfoBox(dataBoxes) {
           raycaster="a-box: .clickable"
           emitevents="true"
           cursor="fuse: false; rayOrigin: mouse;">
-          <a-text
-            value="${stopName}"
-            text="align: right; width: 10; color: black;"
-            font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
+          <a-entity
             look-at="[user-camera]"
-            scale="2 2 2"
             gps-new-entity-place="latitude: ${latitude}; longitude: ${longitude}"
           >
             <a-text
-              value="${platformNumber}"
-              text="width: 3; color: black;"
+              value="${stopName}"
+              text="align: right; width: 10; color: black;"
               font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
-              position="-1.1 -0.2 0"
+              position="0 -0.8 0"
+            >
+            </a-text>
+            
+            <a-text
+              value="${platformNumber}"
+              text="width: 8; color: black;"
+              font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
+              position="-4.5 -1.5 0"
             >
             </a-text>
 
             <a-text
               value="3 m entfernt"
-              text="width: 2.5; color: black;"
-              position="-1.1 -0.4 0"
+              text="width: 8; color: black;"
+              position="-4.5 -2.2 0"
             >
             </a-text>
 
             <a-text
               value="1   Leutewitz"
-              text="width: 2.5; color: black;"
-              position="-1.1 -0.7 0"
+              text="width: 8; color: black;"
+              position="-4.5 -3.5 0"
             >
             </a-text>
 
             <a-text
               value="4   Radebeul West"
-              text="width: 2.5; color: black;"
-              position="-1.1 -0.9 0"
+              text="width: 8; color: black;"
+              position="-4.5 -4 0"
             >
             </a-text>
 
             <a-text
               value="2   Gorbitz"
-              text="width: 2.5; color: black;"
-              position="-1.1 -1.1 0"
+              text="width: 8; color: black;"
+              position="-4.5 -4.5 0"
             >
             </a-text>
 
             <a-text
               value="jetzt"
-              text="width: 2.5; color: black;"
-              position="0.5 -0.7 0"
+              text="width: 8; color: black;"
+              position="0 -3.5 0"
             >
             </a-text>
 
             <a-text
               value="2 min"
-              text="width: 2.5; color: black;"
-              position="0.5 -0.9 0"
+              text="width: 8; color: black;"
+              position="0 -4 0"
             >
             </a-text>
 
             <a-text
               value="5 min"
-              text="width: 2.5; color: black;"
-              position="0.5 -1.1 0"
+              text="width: 8; color: black;"
+              position="0 -4.5 0"
             >
             </a-text>
 
             <a-box
               color="#FFF"
-              transparent="true"
-              opacity="0.9"
-              position="0 -0.7 -1"
-              width="12"
-              height="10"
+              position="-1 -2.6 -1"
+              width="8"
+              height="5"
               cursor-listener
             >
             </a-box>
@@ -240,7 +253,7 @@ function createInfoBox(dataBoxes) {
             </div>
           </div>
 
-          </a-text>
+          </a-entity>
         </a-entity>`
 
       scene.insertAdjacentHTML('beforeend', box);
@@ -303,14 +316,13 @@ window.addEventListener("DOMContentLoaded", (event) => {
     permissionLocation = true;
 
     navigator.geolocation.getCurrentPosition((position) => {
-      console.log('Latitude: ' + position.coords.latitude);
-      console.log('Longitude: ' + position.coords.longitude);
       let distance = getDistanceFromLatLon(position.coords.latitude, position.coords.longitude, 51.034958, 13.80067);
-      console.log(distance);
+      // console.log('Distanz: ' + distance);
     });
   } else {
     console.log('Geolocation not available');
   }
+
 
   initTutorialSlider();
 
@@ -322,8 +334,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   let location = navigator.geolocation.watchPosition(success, error, options);
 
-  console.log(location);
 });
-
-
 

@@ -378,6 +378,295 @@
                         ]
                     }
                 ]
+            },
+            {
+                "name": "Pirnarsche Platz",
+                "platforms": [
+                    {
+                        "name": "Steig 1",
+                        "lat": 51.04962,
+                        "lng": 13.74319,
+                        "departures": [
+                            {
+                                "lineName": "1",
+                                "direction": "Leutewitz",
+                                "realTime": "10:24",
+                                "realTimeDto": "2024-02-01T10:24:00.000+01:00",
+                                "scheduledTime": "10:24",
+                                "scheduledTimeDto": "2024-02-01T10:24:00.000+01:00"
+                            },
+                            {
+                                "lineName": "4",
+                                "direction": "Radebeul West",
+                                "realTime": "10:44",
+                                "realTimeDto": "2024-02-01T10:44:00.000+01:00",
+                                "scheduledTime": "10:44",
+                                "scheduledTimeDto": "2024-02-01T10:44:00.000+01:00"
+                            },
+                            {
+                                "lineName": "2",
+                                "direction": "Gorbitz",
+                                "realTime": "11:04",
+                                "realTimeDto": "2024-02-01T11:04:00.000+01:00",
+                                "scheduledTime": "11:04",
+                                "scheduledTimeDto": "2024-02-01T11:04:00.000+01:00"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Steig 2",
+                        "lat": 51.04953,
+                        "lng": 13.74362,
+                        "departures": [
+                            {
+                                "lineName": "2",
+                                "direction": "Kleinschachwitz",
+                                "realTime": "10:28",
+                                "realTimeDto": "2024-02-01T10:28:00.000+01:00",
+                                "scheduledTime": "10:26",
+                                "scheduledTimeDto": "2024-02-01T10:26:00.000+01:00"
+                            },
+                            {
+                                "lineName": "12",
+                                "direction": "Striesen",
+                                "realTime": "10:46",
+                                "realTimeDto": "2024-02-01T10:46:00.000+01:00",
+                                "scheduledTime": "10:46",
+                                "scheduledTimeDto": "2024-02-01T10:46:00.000+01:00"
+                            },
+                            {
+                                "lineName": "1",
+                                "direction": "Prohlis",
+                                "realTime": "11:06",
+                                "realTimeDto": "2024-02-01T11:06:00.000+01:00",
+                                "scheduledTime": "11:06",
+                                "scheduledTimeDto": "2024-02-01T10:33:00.000+01:00"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Steig 3",
+                        "lat": 51.04854,
+                        "lng": 13.74335,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 4",
+                        "lat": 51.0489,
+                        "lng": 13.74376,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 5",
+                        "lat": 51.04889,
+                        "lng": 13.74448,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 6",
+                        "lat": 51.04957,
+                        "lng": 13.74589,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 7",
+                        "lat": 51.05026,
+                        "lng": 13.74387,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 8",
+                        "lat": 51.04968,
+                        "lng": 13.74331,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 9",
+                        "lat": 51.04949,
+                        "lng": 13.74339,
+                        "departures": [
+                            {  }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Hebbelplatz",
+                "platforms": [
+                    {
+                        "name": "Steig 1",
+                        "lat": 51.05138,
+                        "lng": 13.68283,
+                        "departures": [
+                            {
+                                "lineName": "1",
+                                "direction": "Leutewitz",
+                                "realTime": "10:24",
+                                "realTimeDto": "2024-02-01T10:24:00.000+01:00",
+                                "scheduledTime": "10:24",
+                                "scheduledTimeDto": "2024-02-01T10:24:00.000+01:00"
+                            },
+                            {
+                                "lineName": "4",
+                                "direction": "Radebeul West",
+                                "realTime": "10:44",
+                                "realTimeDto": "2024-02-01T10:44:00.000+01:00",
+                                "scheduledTime": "10:44",
+                                "scheduledTimeDto": "2024-02-01T10:44:00.000+01:00"
+                            },
+                            {
+                                "lineName": "2",
+                                "direction": "Gorbitz",
+                                "realTime": "11:04",
+                                "realTimeDto": "2024-02-01T11:04:00.000+01:00",
+                                "scheduledTime": "11:04",
+                                "scheduledTimeDto": "2024-02-01T11:04:00.000+01:00"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Steig 2",
+                        "lat": 51.05113,
+                        "lng": 13.68264,
+                        "departures": [
+                            {
+                                "lineName": "2",
+                                "direction": "Kleinschachwitz",
+                                "realTime": "10:28",
+                                "realTimeDto": "2024-02-01T10:28:00.000+01:00",
+                                "scheduledTime": "10:26",
+                                "scheduledTimeDto": "2024-02-01T10:26:00.000+01:00"
+                            },
+                            {
+                                "lineName": "12",
+                                "direction": "Striesen",
+                                "realTime": "10:46",
+                                "realTimeDto": "2024-02-01T10:46:00.000+01:00",
+                                "scheduledTime": "10:46",
+                                "scheduledTimeDto": "2024-02-01T10:46:00.000+01:00"
+                            },
+                            {
+                                "lineName": "1",
+                                "direction": "Prohlis",
+                                "realTime": "11:06",
+                                "realTimeDto": "2024-02-01T11:06:00.000+01:00",
+                                "scheduledTime": "11:06",
+                                "scheduledTimeDto": "2024-02-01T10:33:00.000+01:00"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Hauptbahnhof",
+                "platforms": [
+                    {
+                        "name": "Steig 1",
+                        "lat": 51.04092,
+                        "lng": 13.73303,
+                        "departures": [
+                            {
+                                "lineName": "1",
+                                "direction": "Leutewitz",
+                                "realTime": "10:24",
+                                "realTimeDto": "2024-02-01T10:24:00.000+01:00",
+                                "scheduledTime": "10:24",
+                                "scheduledTimeDto": "2024-02-01T10:24:00.000+01:00"
+                            },
+                            {
+                                "lineName": "4",
+                                "direction": "Radebeul West",
+                                "realTime": "10:44",
+                                "realTimeDto": "2024-02-01T10:44:00.000+01:00",
+                                "scheduledTime": "10:44",
+                                "scheduledTimeDto": "2024-02-01T10:44:00.000+01:00"
+                            },
+                            {
+                                "lineName": "2",
+                                "direction": "Gorbitz",
+                                "realTime": "11:04",
+                                "realTimeDto": "2024-02-01T11:04:00.000+01:00",
+                                "scheduledTime": "11:04",
+                                "scheduledTimeDto": "2024-02-01T11:04:00.000+01:00"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Steig 2",
+                        "lat": 51.04109,
+                        "lng": 13.73269,
+                        "departures": [
+                            {
+                                "lineName": "2",
+                                "direction": "Kleinschachwitz",
+                                "realTime": "10:28",
+                                "realTimeDto": "2024-02-01T10:28:00.000+01:00",
+                                "scheduledTime": "10:26",
+                                "scheduledTimeDto": "2024-02-01T10:26:00.000+01:00"
+                            },
+                            {
+                                "lineName": "12",
+                                "direction": "Striesen",
+                                "realTime": "10:46",
+                                "realTimeDto": "2024-02-01T10:46:00.000+01:00",
+                                "scheduledTime": "10:46",
+                                "scheduledTimeDto": "2024-02-01T10:46:00.000+01:00"
+                            },
+                            {
+                                "lineName": "1",
+                                "direction": "Prohlis",
+                                "realTime": "11:06",
+                                "realTimeDto": "2024-02-01T11:06:00.000+01:00",
+                                "scheduledTime": "11:06",
+                                "scheduledTimeDto": "2024-02-01T10:33:00.000+01:00"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "Steig 3",
+                        "lat": 51.03975,
+                        "lng": 13.73352,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 4",
+                        "lat": 51.03968,
+                        "lng": 13.73337,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 5",
+                        "lat": 51.03993,
+                        "lng": 13.73419,
+                        "departures": [
+                            {  }
+                        ]
+                    },
+                    {
+                        "name": "Steig 6",
+                        "lat": 51.03973,
+                        "lng": 13.73377,
+                        "departures": [
+                            {  }
+                        ]
+                    }
+                ]
             }
         ]
     }

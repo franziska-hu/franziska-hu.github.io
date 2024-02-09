@@ -72,6 +72,18 @@ img {
     padding: 10px 20px;
 }
 
+@keyframes pulsing {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
 /**************************************************************************************************************/
 /**********************************    Controls, Button Toggle   **********************************************/
 /**************************************************************************************************************/
@@ -300,6 +312,9 @@ ul.overlay__content-detour-wrapper {
 
 .live-hint svg {
     margin-left: 5px;
+    animation-name: pulsing;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 .overlay__content-departures-info {

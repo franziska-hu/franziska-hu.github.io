@@ -34,7 +34,7 @@ function switchTheme(theme) {
 
   if (theme === 'dark') {
     infoboxes.forEach(box => {
-      box.setAttribute('color', '#000');
+      box.setAttribute('color', '#2D2D2D');
     });
   } else {
     infoboxes.forEach(box => {
@@ -123,7 +123,7 @@ function success(pos) {
   const crd = pos.coords;
   const locationInfo = document.querySelector(".location-information");
 
-  locationInfo.innerHTML = "Accuracy: " + crd.accuracy + " <br> " + "Lng: " + crd.longitude + " " + "Lat: " + crd.latitude;
+  //locationInfo.innerHTML = "Accuracy: " + crd.accuracy + " <br> " + "Lng: " + crd.longitude + " " + "Lat: " + crd.latitude;
 
   /*
   console.log('____________________________________________');
@@ -153,11 +153,6 @@ function getOverlayMarkUp(stopName, platform) {
       </div>
 
       <div class="overlay__content">
-        <ul class="overlay__content-meta-info">
-          <li>Tram</li>
-          <li>Rollstuhlgerecht</li>
-        </ul>
-
         <div class="overlay__content-lines">
           <h3>Linien</h3>
           <ul class="overlay__content-lines-wrapper">
@@ -225,17 +220,34 @@ function getOverlayMarkUp(stopName, platform) {
           <h3>Aktuelle Umleitungen</h3>
           <ul class="overlay__content-detour-wrapper">
             <li>
-              <div class="overlay__content-detour-line">Straßenbahnlinie 4</div>
-              <div class="overlay__content-detour-type">verkürzte Linienführung</div>
-              <div class="overlay__content-detour-info">
+              <button class="overlay__content-detour-header">
+                <div>
+                  <div class="overlay__content-detour-line">4</div>
+                  <div class="overlay__content-detour-type">verkürzte Linienführung</div>
+                </div>
+
+                <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path  fill="none" d="M1 1L11 11L21 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+
+              <div class="overlay__content-detour-content hide">
                 <div>Verkürzte Strecke: Laubegast -Postplatz - Mickten - Forststraße - Radebeul Ost.</div>
                 <div>Ersatzbusverkehr EV4: Forststraße - Radebeul West - Weinböhla</div>
               </div>
             </li>
             <li>
-              <div class="overlay__content-detour-line">Straßenbahnlinie 2</div>
-              <div class="overlay__content-detour-type">verkürzte Linienführung</div>
-              <div class="overlay__content-detour-info">
+              <button class="overlay__content-detour-header">
+                <div>
+                  <div class="overlay__content-detour-line">2</div>
+                  <div class="overlay__content-detour-type">verkürzte Linienführung</div>
+                </div>
+
+                <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="none" d="M1 1L11 11L21 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+              <div class="overlay__content-detour-content hide">
                 <div>Verkürzte Strecke: Laubegast -Postplatz - Mickten - Forststraße - Radebeul Ost.</div>
                 <div>Ersatzbusverkehr EV4: Forststraße - Radebeul West - Weinböhla</div>
               </div>
@@ -243,7 +255,8 @@ function getOverlayMarkUp(stopName, platform) {
           </ul>
         </div>
       </div>
-    </div>`
+    </div>
+  `
 }
 
 function createInfoBox(dataBoxes) {
@@ -272,7 +285,7 @@ function createInfoBox(dataBoxes) {
             look-at="[user-camera]"
             gps-new-entity-place="latitude: ${latitude}; longitude: ${longitude}"
           >
-            <a-entity position="-4 5 0">
+            <a-entity position="-4 5 1">
               <a-text
                 value="${stopName}"
                 text="align: right; width: 10; color: black;"
@@ -339,10 +352,10 @@ function createInfoBox(dataBoxes) {
               </a-text>
             </a-entity>
 
-            <a-sphere position="0 0 0" color="red" radius="0.5"></a-sphere>
+            <a-sphere position="0 0 0" color="#FDC300" radius="0.5"></a-sphere>
 
             <a-box
-              color="#FFF"
+              color="white"
               position="0 2.5 -1"
               width="8"
               height="5"
@@ -370,6 +383,15 @@ function createInfoBox(dataBoxes) {
       overlay.classList.remove('open');
     });
   });
+
+  let accordionButtons = document.querySelectorAll('.overlay__content-detour-header');
+
+  accordionButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      button.nextElementSibling.classList.toggle('hide');
+      button.classList.toggle('open');
+    });
+  });
 }
 
 /**************************************************************************************************************/
@@ -381,6 +403,7 @@ let permissionCamera = false;
 
 window.addEventListener("DOMContentLoaded", (event) => {
 
+  // Init
   checkLocationCameraPermission();
 
   fetch('./data.json')
@@ -389,27 +412,54 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   checkTheme();
 
-  let toggleButtonDarkMode = document.querySelector('.darkmode-toggle');
 
-  if (localStorage.getItem("theme") === "dark") {
-    toggleButtonDarkMode.checked = true;
-  } else {
-    toggleButtonDarkMode.checked = false;
-  }
+  // get needed elements
+  let tutorialButton = document.querySelector('.button-tutorial');
+  let searchButton = document.querySelector('.button-search');
+  let modeButton = document.querySelector('.button-mode');
+  let helpboxes = document.querySelectorAll('.help-box');
+  let helpbox1 = document.querySelector('.help-box--step-1');
 
-  toggleButtonDarkMode.addEventListener('click', function(event) {
-    if (event.target.checked === true) {
-      switchTheme("dark");
-    } else {
+
+  // Set Event Listeners
+  tutorialButton.addEventListener('click', function() {
+    document.querySelector('.overlay--tutorial').classList.add('open');
+  });
+
+  searchButton.addEventListener('click', function() {
+    document.querySelector('.overlay--search').classList.add('open');
+  });
+
+  modeButton.addEventListener('click', function(event) {
+    let currentTheme = document.querySelector('html').getAttribute('data-theme');
+
+    if (currentTheme === 'dark') {
       switchTheme("light");
+    } else {
+      switchTheme("dark");
     }
   });
 
-  let tutorialButton = document.querySelector('.button-tutorial');
+  helpboxes.forEach(box => {
+    let button = box.querySelector('button');
+    console.log(button);
 
-  tutorialButton.addEventListener('click', function() {
-      document.querySelector('.overlay--tutorial').classList.add('open');
+    button.addEventListener('click', function() {
+      box.classList.add('hidden');
+
+      if (box.classList.contains('help-box--step-1')) {
+        setTimeout(() => {
+          document.querySelector('.help-box--step-2').classList.remove('hidden');
+        }, "10000");
+      }
+    })
   });
+
+
+
+  setTimeout(() => {
+    helpbox1.classList.remove('hidden');
+  }, "5000");
 
   if ("geolocation" in navigator) {
     permissionLocation = true;
@@ -422,7 +472,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     console.log('Geolocation not available');
   }
 
-
   initTutorialSlider();
 
   options = {
@@ -430,8 +479,5 @@ window.addEventListener("DOMContentLoaded", (event) => {
     timeout: 5000,
     maximumAge: 0,
   };
-
-  let location = navigator.geolocation.watchPosition(success, error, options);
-
 });
 

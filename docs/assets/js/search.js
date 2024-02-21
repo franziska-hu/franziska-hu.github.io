@@ -80,7 +80,12 @@ function calculateDistance() {
     let pin = document.querySelector('a-sphere');
     let wrapper = document.querySelector('.pin-distance--wrapper');
 
-    if (pin.components === undefined || pin.components['gps-new-entity-place'].distance === undefined) {
+    if (pin.components === undefined) {
+        wrapper.classList.add('hide');
+        return;
+    }
+
+    if (pin.components['gps-new-entity-place'].distance === undefined) {
         wrapper.classList.add('hide');
         return;
     }

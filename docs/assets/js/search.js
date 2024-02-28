@@ -54,7 +54,7 @@ function calculateDelayInMinutes(date1, date2) {
 
     let delayMiniutes = delayMilliseconds / 60000; // calculate in Miniutes
 
-    if (delayMiniutes > 0) {
+    if (delayMiniutes < 0) {
         return `<span class="highlight--red">+ ${delayMiniutes} min</span>`;
     }
     

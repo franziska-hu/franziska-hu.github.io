@@ -118,19 +118,21 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
-.button-tutorial {
+.button--tutorial {
     background-color: #51B8F2;
 }
 
-.button-search {
+.button--search {
     background-color: var(--color-primary);
 }
 
-.button-mode {
+.button.button--mode {
     background-color: var(--color-background);
-    color: var(--color-text)
+    color: var(--color-text);
+    border: 1px solid white;
 }
 
 .button {
@@ -139,6 +141,21 @@ img {
     font-size: 16px;
     height: 30px;
     margin-left: 10px;
+}
+
+.button--mode .icon svg:last-child,
+.dummy-button--mode svg:last-child {
+    display: none;
+}
+
+html[data-theme="dark"] .button--mode .icon svg:last-child,
+html[data-theme="dark"] .dummy-button--mode svg:last-child {
+    display: block;
+}
+
+html[data-theme="dark"] .button--mode .icon svg:first-child,
+html[data-theme="dark"] .dummy-button--mode svg:first-child {
+    display: none;
 }
 
 /**************************************************************************************************************/
@@ -196,6 +213,18 @@ img {
     top: 20px;
 }
 
+.overlay--permission-warning .overlay__header-close-button {
+    position: relative;
+    text-align: center;
+    background-color: var(--color-highlight-red);
+    color: var(--color-background);
+    padding: 0 20px;
+    margin: 0;
+    top: 0;
+    right: 0;
+    font-weight: 600;
+}
+
 .overlay__header-close-button svg {
     fill: #2D2D2D;
     height: 38px;
@@ -206,8 +235,10 @@ img {
     padding: 10px 20px 20px;
 }
 
-/********************************  Search Overlay  **********************************************/
+/*******************************  Permission Overlay  *******************************************/
+/*******************************  and Search Overlay  *******************************************/
 
+.overlay--permission-warning,
 .overlay--search {
     background-color: var(--color-grey);
     padding: 0 16px;
@@ -217,6 +248,7 @@ img {
     fill: var(--color-text);
 }
 
+.warning-box,
 .search-box {
     background-color: var(--color-background);
     border-radius: var(--border-radius);
@@ -224,6 +256,11 @@ img {
     margin: 130px auto 0;
 }
 
+.warning-box.hidden {
+    display: none;
+}
+
+.warning-box__top,
 .search-box__top {
     background-color: var(--color-primary);
     color: #2D2D2D;
@@ -233,18 +270,38 @@ img {
     border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
-.search-box__top svg {
-    width: 50px;
+.warning-box__top {
+    background-color: var(--color-highlight-red);
 }
 
+.warning-box__top svg,
+.search-box__top svg {
+    width: 50px;
+    color: var(--color-background);
+}
+
+.warning-box__content,
 .search-box__content {
     padding: 30px 24px;
+}
+
+.warning-box__content {
+    text-align: center;
+}
+
+.search-box__content form {
     display: flex;
     flex-direction: column;
 }
 
+.warning-box__content h2,
 .search-box__content h2 {
     margin: 0 0 20px;
+}
+
+.warning-box__content h2,
+.warning-box__content p {
+    text-align: center;
 }
 
 .search-box__content label {
@@ -269,42 +326,6 @@ img {
     font-weight: 600;
 }
 
-/**********************************    Help Box    **********************************************/
-
-.help-box__wrapper {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-}
-
-.help-box {
-    background-color: #9FDDFF;
-    color: #2D2D2D;
-    border-radius: var(--border-radius);
-    margin: 0 20px 25px;
-    padding: 25px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
-    max-width: 500px;
-}
-
-.help-box.hidden {
-    display: none;
-}
-
-.help-box .icon-wrapper {
-    width: 35px;
-}
-
-.help-box button {
-    background-color: transparent;
-    border: none;
-}
-
 /**********************************  Detail Page  **********************************************/
 
 .overlay__content-lines-wrapper {
@@ -313,12 +334,61 @@ img {
 
 .overlay__content-lines-wrapper li {
     align-items: center;
-    border: 1px solid var(--color-text);
     display: flex;
-    height: 25px;
     justify-content: center;
+}
+
+.type--tram,
+.type--bus {
     margin-right: 10px;
-    width: 25px;
+    padding: 5px 8px 5px 8px;
+    border: 1px solid var(--color-text);
+}
+
+.type--bus {
+    border-radius: 50%;
+}
+
+.tooltip {
+    position: relative;
+    width: fit-content;
+    margin-top: 24px;
+}
+
+.tooltip__button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+.tooltip__button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.tooltip__content {
+    display: flex;
+    flex-direction: row;
+    background-color: #D9D9D9;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    transform: translate(110%, 0);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+}
+
+.tooltip__content.hidden {
+    display: none;
+}
+
+.tooltip__content div {
+    background-color: white;
+}
+
+.tooltip__wrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 .overlay__content-departures,
@@ -431,26 +501,37 @@ ul.overlay__content-detour-wrapper li {
 
 /**********************************  Tutorial Overlay  **********************************************/
 
-.tutorial-slider__permission-location,
-.tutorial-slider__permission-camera {
+.overlay--tutorial h2 {
+    margin-right: 60px;
+}
+
+.permission-box--location,
+.permission-box--camera {
     padding: 15px;
-    border: 2px solid var(--color-highlight-red);
-    color: var(--color-highlight-red);
+    border: 2px solid var(--color-highlight-green);
+    color: var(--color-highlight-green);
     border-radius: var(--border-radius);
     margin-bottom: 15px;
     display: flex;
+    font-weight: 600;
+    text-align: left;
     align-items: center;
 }
 
-.tutorial-slider__permission-location .icon svg,
-.tutorial-slider__permission-camera .icon svg {
-    margin-right: 5px;
+.permission-box--location .icon,
+.permission-box--camera .icon {
+    display: flex;
 }
 
-.tutorial-slider__permission-location.permission-granted,
-.tutorial-slider__permission-camera.permission-granted {
-    border-color: var(--color-highlight-green);
-    color: var(--color-highlight-green);
+.permission-box--location .icon svg,
+.permission-box--camera .icon svg {
+    margin-right: 10px;
+}
+
+.permission-box--location.permission-denied,
+.permission-box--camera.permission-denied {
+    border-color: var(--color-highlight-red);
+    color: var(--color-highlight-red);
 }
 
 .slide-item__content {
@@ -465,9 +546,8 @@ ul.overlay__content-detour-wrapper li {
     position: absolute;
     left: 0;
     right: 0;
-    top: 0;
+    top: 112px;
     bottom: 0;
-    margin: 88px 0 0;
 }
 
 .slide-item__headline {
@@ -481,9 +561,30 @@ ul.overlay__content-detour-wrapper li {
     margin: 25px 0;
 }
 
-.slide-item ul li svg {
+.slide-item .icon-list .icon {
     margin-right: 15px;
+}
+
+.slide-item .icon-list .icon svg {
     width: 50px;
+}
+
+.slide-item .icon .dummy-button {
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    border-radius: var(--border-radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-primary);
+    box-shadow: 3px 3px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.slide-item .icon .dummy-button.dummy-button--mode {
+    background-color: var(--color-background);
+    border: 1px solid white;
+    color: var(--color-text);
 }
 
 .slider-control-wrapper {
@@ -521,3 +622,41 @@ ul.overlay__content-detour-wrapper li {
     fill: var(--color-text);
 }
 
+
+/************************************************************************************************/
+/**********************************    Help Box    **********************************************/
+/************************************************************************************************/
+
+.help-box__wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.help-box {
+    background-color: #9FDDFF;
+    color: #2D2D2D;
+    border-radius: var(--border-radius);
+    margin: 0 20px 25px;
+    padding: 25px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    max-width: 500px;
+}
+
+.help-box.hidden {
+    display: none;
+}
+
+.help-box .icon-wrapper {
+    width: 35px;
+}
+
+.help-box button {
+    background-color: transparent;
+    border: none;
+}

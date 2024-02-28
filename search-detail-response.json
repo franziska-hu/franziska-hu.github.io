@@ -218,9 +218,7 @@
                         "type": "bus"
                     }
                 ],
-                "routeChanges": [
-                    { }
-                ],
+                "routeChanges": [],
                 "departures": [
                     {
                         "lineName": "87",
@@ -321,15 +319,9 @@
                 "name": "Altenberger Straße Steig 6",
                 "platform": "Steig 6",
                 "accessible": true,
-                "lines": [
-                    { }
-                ],
-                "routeChanges": [
-                    { }
-                ],
-                "departures": [
-                    { }
-                ]
+                "lines": [],
+                "routeChanges": [],
+                "departures": []
             },
             {
                 "name": "Bärensteiner Straße Steig 1",

@@ -1,49 +1,9 @@
-/**************************************************************************************************************/
-/**********************************         Theme Mode           **********************************************/
-/**************************************************************************************************************/
 
-function switchTheme(theme) {
-    document.querySelector('html').setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-
-    let infoboxes = document.querySelectorAll("a-box");
-
-    if (theme === 'dark') {
-        infoboxes.forEach(box => {
-        box.setAttribute('color', '#2D2D2D');
-        });
-    } else {
-        infoboxes.forEach(box => {
-        box.setAttribute('color', '#fff');
-        });
-    }
-}
-  
-function checkTheme() {
-    const localStorageTheme = localStorage.getItem("theme");
-    const systemSettingDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-    if (localStorageTheme !== null) {
-        switchTheme(localStorageTheme);
-        return;
-    }
-
-    if (systemSettingDark.matches) {
-        switchTheme("dark");
-        return;
-    }
-
-    switchTheme("light");
-}
+let clicked = false;
 
 /**************************************************************************************************************/
 /**********************************     Haltestellenauskunft     **********************************************/
 /**************************************************************************************************************/
-
-function getSearchedStop() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('stop');
-}
 
 function calculateDelayInMinutes(date1, date2) {
     let delayMilliseconds = new Date(date2) - new Date(date1);
@@ -73,68 +33,6 @@ function calculateTimeDifferenceInMinutes(time) {
     return differenceMiniutes + " min";
 }
 
-let originalDistance;
-let initialized = false;
-
-function calculateDistance() {
-    let pin = document.querySelector('a-sphere');
-    let wrapper = document.querySelector('.pin-distance--wrapper');
-
-    if (pin.components === undefined || pin.components['gps-new-entity-place'].distance === undefined) {
-        wrapper.classList.add('hide');
-        return;
-    }
-
-    let distance = pin.components['gps-new-entity-place'].distance;
-    let displayDistance = document.querySelector('.pin-distance');
-
-    displayDistance.innerHTML = Math.round(distance);
-    wrapper.classList.remove('hide');
-
-    if (Math.abs(originalDistance - distance) < 20 && initialized) return;
-    initialized = true;
-    originalDistance = distance;
-
-    let scalingFactor = distance * 0.1;
-
-    pin.setAttribute('scale', scalingFactor + " " + scalingFactor + " " + scalingFactor);
-}
-
-function getDeparturesHtml(depatures, detailed = false) {
-    let markup = '';
-
-    if (depatures.length === 0) {
-        return `<div>Keine Abfahrten geplant</div>`;
-    }
-
-    depatures.forEach(departure => {
-        let difference = calculateTimeDifferenceInMinutes(departure.realTimeDto);
-        let delay = calculateDelayInMinutes(departure.realTimeDto, departure.scheduledTimeDto);
-
-        if (detailed) {
-
-            markup = markup.concat(`
-                <li>
-                    <div class="overlay__content-departures-info">
-                        <span>${departure.lineName} ${departure.direction}</span>
-                        <span>${difference}</span>
-                    </div>
-                    <div class="overlay__content-departures-detail-info">${departure.scheduledTime} ${delay}</div>
-                </li>
-            `);
-        } else {
-            markup = markup.concat(`
-                <li>
-                    <div>${departure.lineName} ${departure.direction}</div>
-                    <div>${difference}</div>
-                </li>
-            `);
-        }
-    });
-
-    return markup;
-}
-
 function getLinesHtml(lines) {
     if (lines.length === 0) {
         return "";
@@ -148,6 +46,31 @@ function getLinesHtml(lines) {
 
     return markup;
 }
+
+function getDeparturesHtml(depatures) {
+    let markup = '';
+  
+    if (depatures.length === 0) {
+        return `<div>Keine Abfahrten geplant</div>`;
+    }
+  
+    depatures.forEach(departure => {
+      let difference = calculateTimeDifferenceInMinutes(departure.realTimeDto);
+      let delay = calculateDelayInMinutes(departure.realTimeDto, departure.scheduledTimeDto);
+  
+      markup = markup.concat(`
+          <li>
+              <div class="overlay__content-departures-info">
+                  <span>${departure.lineName} ${departure.direction}</span>
+                  <span>${difference}</span>
+              </div>
+              <div class="overlay__content-departures-detail-info">${departure.scheduledTime} Uhr ${delay}</div>
+          </li>
+      `);
+    });
+  
+    return markup;
+  }
 
 function getRouteChangesHtml(routeChanges) {
     if (routeChanges.length === 0) {
@@ -181,7 +104,7 @@ function getRouteChangesHtml(routeChanges) {
 }
 
 /**************************************************************************************************************/
-/**********************************        Overlay Details       **********************************************/
+/**********************************           Overlay            **********************************************/
 /**************************************************************************************************************/
 
 function getOverlay(data) {
@@ -192,7 +115,6 @@ function getOverlay(data) {
         overlay = `
             <div class="overlay__header">
                 <h2>${data.name}</h2>
-                <div class="overlay__header-platform">${data.platform}</div>
 
                 <button type="button" class="overlay__header-close-button">
                 <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"/></svg>
@@ -274,121 +196,67 @@ function getOverlay(data) {
     return overlay;
 }
 
-function createOverlay(dataDepartures) {
-    const stop = getSearchedStop();
-    let overlay = document.querySelector('.overlay');
-
-    let info = dataDepartures.data.dmDepartures.find(e => e.name.includes(stop));
-    let overlayMarkup  = getOverlay(info);
-
-    overlay.insertAdjacentHTML('afterbegin', overlayMarkup);
-
-      
-    // set event listeners
-    let overlayCloseButton = document.querySelector('.overlay .overlay__header-close-button');
-
-    overlayCloseButton.addEventListener('click', function() {
-        document.querySelector('.overlay').classList.remove('open');
-    });
-
-    let accordionButtons = document.querySelectorAll('.overlay__content-detour-header');
-
-    accordionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-        button.nextElementSibling.classList.toggle('hide');
-        button.classList.toggle('open');
+function handleOverlay(dataDepartures, box) {
+    if (box.dataset.overlayinitialized === "false") {
+        const stop = box.dataset.name;
+        let overlay = box.nextElementSibling;
+    
+        let info = dataDepartures.data.dmDepartures.find(e => e.name.includes(stop));
+    
+    
+        let overlayMarkup  = getOverlay(info);
+        console.log(overlay)
+    
+        overlay.insertAdjacentHTML('afterbegin', overlayMarkup);
+    
+        // set event listeners
+        let overlayCloseButton = overlay.querySelector('.overlay .overlay__header-close-button');
+    
+        overlayCloseButton.addEventListener('click', function() {
+            box.nextElementSibling.classList.remove('open');
         });
-    });
+    
+        let accordionButtons = overlay.querySelectorAll('.overlay__content-detour-header');
+    
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', function() {
+            button.nextElementSibling.classList.toggle('hide');
+            button.classList.toggle('open');
+            });
+        });
 
-    let tooltipButton = overlay.querySelector('.tooltip__button');
+        let tooltipButton = overlay.querySelector('.tooltip__button');
 
-    tooltipButton.addEventListener('click', function(event) {
-        tooltipButton.nextElementSibling.classList.toggle('hidden');
-    });
+        tooltipButton.addEventListener('click', function(event) {
+            tooltipButton.nextElementSibling.classList.toggle('hidden');
+        });
+
+        box.dataset.overlayinitialized = "true";
+    }
+
+    box.nextElementSibling.classList.add('open');
+    clicked = false;
 }
 
-/**************************************************************************************************************/
-/**********************************            Infobox           **********************************************/
-/**************************************************************************************************************/
-
-function createInfoBox(dataBox) {
-    const stop = getSearchedStop();
-    let scene = document.querySelector('a-scene');
-    let infobox = document.querySelector('.stop-information-box');
-    
-    let stopInfo = dataBox.data.dmDepartures.find(e => e.name.includes(stop));
-
-    let pinMarkup = `
-        <a-sphere gps-new-entity-place="latitude: ${stopInfo.lat}; longitude: ${stopInfo.lng}" color="#CC4747" radius="1"></a-sphere>
-    `
-
-    scene.insertAdjacentHTML('beforeend', pinMarkup);
-    
-    let depaturesMarkup = getDeparturesHtml(stopInfo.departures);
-
-    let boxMarkup = `
-        <button class="stop-information-box__header">
-            <div>
-                <h2>${stopInfo.name}</h2>
-                <div class="pin-distance--wrapper">Du bist <span class="pin-distance">x</span> m entfernt</div>
-            </div>
-
-            <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path  fill="none" d="M1 1L11 11L21 1" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
-
-        <div class="stop-information-box__content hide">
-            <ul class="stop-information-box__departures">
-                ${depaturesMarkup}
-            </ul>
-
-            <div class="button__wrapper">
-            <button class="button detail-button" type="button">mehr Details</button>
-            </div>
-        </div>
-    `
-
-    infobox.insertAdjacentHTML('afterbegin', boxMarkup);
-
-    let accordionButton = document.querySelector('.stop-information-box__header');
-    let detailButton = document.querySelector('.detail-button');
-
-    accordionButton.addEventListener('click', function() {
-        accordionButton.nextElementSibling.classList.toggle('hide');
-        accordionButton.classList.toggle('open');
-    });
-
-    detailButton.addEventListener('click', function() {
-        document.querySelector('.overlay').classList.add('open');
-    });
-
-    intervalId = setInterval(calculateDistance, 10000);
-
-    setTimeout(() => {
-        calculateDistance();
-    }, 1000);
+function initOverlay(box) {
+    fetch('./data-detail.json')
+    .then((response) => response.json())
+    .then((json) => handleOverlay(json, box));
 }
 
-/**************************************************************************************************************/
-/**********************************             Main             **********************************************/
-/**************************************************************************************************************/
 
-let intervalId;
+AFRAME.registerComponent('cursor-listener', {
+    init: function() {
+      var el = this.el;
 
-window.addEventListener("DOMContentLoaded", (event) => {
-    // Init
-    checkTheme();
-
-    fetch('./search-response.json')
-    .then((response) => response.json())
-    .then((json) => createInfoBox(json));
-
-    fetch('./search-detail-response.json')
-    .then((response) => response.json())
-    .then((json) => createOverlay(json));
+      el.addEventListener('click', function(event) {
+        if (!clicked) {
+            clicked = true;
+            initOverlay(el);
+        }
+      });
+    }
 });
 
-window.addEventListener("beforeunload", (event) => {
-    clearInterval(intervalId);
-});
+
+

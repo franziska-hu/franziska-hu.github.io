@@ -42,7 +42,7 @@
                         "departures": [
                             {
                                 "lineName": "85",
-                                "direction": "Stiesen",
+                                "direction": "Striesen",
                                 "realTime": "10:24",
                                 "realTimeDto": "2024-02-01T10:24:00.000+01:00",
                                 "scheduledTime": "10:22",
@@ -117,6 +117,14 @@
                                 "realTimeDto": "2024-02-01T11:01:00.000+01:00",
                                 "scheduledTime": "11:01",
                                 "scheduledTimeDto": "2024-02-01T11:01:00.000+01:00"
+                            },
+                            {
+                                "lineName": "87",
+                                "direction": "Otto-Pilz-Str.",
+                                "realTime": "11:21",
+                                "realTimeDto": "2024-02-01T11:21:00.000+01:00",
+                                "scheduledTime": "11:21",
+                                "scheduledTimeDto": "2024-02-01T11:21:00.000+01:00"
                             }
                         ]
                     },
@@ -155,9 +163,7 @@
                         "name": "Steig 6",
                         "lat": 51.03875,
                         "lng": 13.80613,
-                        "departures": [
-                            {}
-                        ]
+                        "departures": []
                     }
                 ]
 
@@ -365,22 +371,18 @@
                         "name": "Steig 91",
                         "lat": 51.04786,
                         "lng": 13.74983,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 92",
                         "lat": 51.04753,
                         "lng": 13.75009,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     }
                 ]
             },
             {
-                "name": "Pirnarsche Platz",
+                "name": "Pirnaischer Platz",
                 "platforms": [
                     {
                         "name": "Steig 1",
@@ -448,57 +450,43 @@
                         "name": "Steig 3",
                         "lat": 51.04854,
                         "lng": 13.74335,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 4",
                         "lat": 51.0489,
                         "lng": 13.74376,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 5",
                         "lat": 51.04889,
                         "lng": 13.74448,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 6",
                         "lat": 51.04957,
                         "lng": 13.74589,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 7",
                         "lat": 51.05026,
                         "lng": 13.74387,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 8",
                         "lat": 51.04968,
                         "lng": 13.74331,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 9",
                         "lat": 51.04949,
                         "lng": 13.74339,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     }
                 ]
             },
@@ -638,33 +626,25 @@
                         "name": "Steig 3",
                         "lat": 51.03975,
                         "lng": 13.73352,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 4",
                         "lat": 51.03968,
                         "lng": 13.73337,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 5",
                         "lat": 51.03993,
                         "lng": 13.73419,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     },
                     {
                         "name": "Steig 6",
                         "lat": 51.03973,
                         "lng": 13.73377,
-                        "departures": [
-                            {  }
-                        ]
+                        "departures": []
                     }
                 ]
             }

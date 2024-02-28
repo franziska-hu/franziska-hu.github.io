@@ -223,12 +223,63 @@ a.button {
 
 .overlay__content-lines-wrapper li {
     align-items: center;
-    border: 1px solid var(--color-text);
     display: flex;
-    height: 25px;
     justify-content: center;
+}
+
+.type--tram,
+.type--bus {
     margin-right: 10px;
-    width: 25px;
+    padding: 5px 8px 5px 8px;
+    border: 1px solid var(--color-text);
+}
+
+.type--bus {
+    border-radius: 50%;
+}
+
+.tooltip {
+    position: relative;
+    width: fit-content;
+    margin-top: 24px;
+}
+
+.tooltip__button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    margin-left: 10px;
+}
+
+.tooltip__button svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--color-text);
+}
+
+.tooltip__content {
+    display: flex;
+    flex-direction: row;
+    background-color: #D9D9D9;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    transform: translate(110%, 0);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+}
+
+.tooltip__content.hidden {
+    display: none;
+}
+
+.tooltip__content div {
+    background-color: white;
+}
+
+.tooltip__wrapper {
+    display: flex;
+    flex-direction: row;
 }
 
 .overlay__content-departures,

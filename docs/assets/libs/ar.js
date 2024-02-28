@@ -6859,6 +6859,8 @@
                                             this.initialPosition = this._proj.project(A, I);
                                         }
                                         _gpsReceived(A) {
+                                            localStorage.setItem("Latitude", A.coords.latitude);
+                                            localStorage.setItem("Longitude", A.coords.longitude);
                                             let I = Number.MAX_VALUE;
                                             A.coords.accuracy <= this._gpsMinAccuracy &&
                                                 (null === this._lastCoords ? (this._lastCoords = { latitude: A.coords.latitude, longitude: A.coords.longitude }) : (I = this._haversineDist(this._lastCoords, A.coords)),
@@ -8365,13 +8367,17 @@
                         play: function () {
                             if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                                 const A = { video: { facingMode: "environment" } };
+                                const permissiontrigger = new CustomEvent("checkPermissions");
                                 navigator.mediaDevices
                                     .getUserMedia(A)
                                     .then((A) => {
                                         (this.video.srcObject = A), this.video.play();
+                                        localStorage.setItem("cameraPermission", "granted");
+                                        window.dispatchEvent(permissiontrigger);
                                     })
                                     .catch((A) => {
-                                        this.el.sceneEl.systems.arjs._displayErrorPopup(`Webcam error: ${A}`);
+                                        localStorage.setItem("cameraPermission", "denied");
+                                        window.dispatchEvent(permissiontrigger);
                                     });
                             } else this.el.sceneEl.systems.arjs._displayErrorPopup("sorry - media devices API not supported");
                         },
@@ -8855,6 +8861,7 @@
                         initialPositionAsOrigin: { type: "boolean", default: !1 },
                     },
                     init: function () {
+                        localStorage.setItem("gpsPermission", "granted");
                         this._testForOrientationControls(),
                             (this.fakeGpsStarted = !1),
                             (this.threeLoc = new H.LocationBased(this.el.sceneEl.object3D, this.el.object3D, { initialPositionAsOrigin: this.data.initialPositionAsOrigin })),
@@ -8862,9 +8869,17 @@
                                 (this._currentPosition = { longitude: A.coords.longitude, latitude: A.coords.latitude }), this._sendGpsUpdateEvent(A.coords.longitude, A.coords.latitude);
                             }),
                             this.threeLoc.on("gpserror", (A) => {
-                                A >= 1 && A <= 3
-                                    ? this._displayError(["User denied access to GPS.", "GPS satellites not available.", "Timeout communicating with GPS satellites - try moving to a more open area."][A - 1])
-                                    : this._displayError(`Unknown geolocation error code ${A}.`);
+                                if (A > 1 && A <= 3) {
+                                    this._displayError(["User denied access to GPS.", "GPS satellites not available.", "Timeout communicating with GPS satellites - try moving to a more open area."][A - 1])
+                                    return;
+                                }
+
+                                if (A === 1) {
+                                    localStorage.setItem("gpsPermission", "denied");
+                                    return;
+                                }
+
+                                this._displayError(`Unknown geolocation error code ${A}.`);
                             });
                         const A = this._isMobile();
                         this.el.setAttribute("look-controls-enabled", !A),
@@ -9190,6 +9205,7 @@
                                 this._disposeSourceWebcam();
                         }
                         (this.domElement = null), document.body.removeEventListener("click", this.onInitialClick, { once: !0 });
+                        localStorage.clear();
                     }),
                     (p.prototype._disposeSourceImage = function () {
                         var A = document.querySelector("#arjs-video");

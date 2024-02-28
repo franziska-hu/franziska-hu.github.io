@@ -160,9 +160,7 @@
                 "name": "Altenberger Straße Steig 6",
                 "lat": 51.03875,
                 "lng": 13.80613,
-                "departures": [
-                    { }
-                ]
+                "departures": []
             },
             {
                 "name": "Bärensteiner Straße Steig 1",

@@ -5,6 +5,7 @@
 [data-theme="light"] {
     --color-highlight-red: #CC4747;
     --color-highlight-green: #488234;
+    --color-highlight-blue: #087A87;
     --color-text: #2D2D2D;
     --color-background: #fff;
     --color-background-overlay: rgba(255, 255, 255);
@@ -17,6 +18,7 @@
 [data-theme="dark"] {
     --color-highlight-red: #F75757;
     --color-highlight-green: #78D95B;
+    --color-highlight-blue: #45D9EA;
     --color-text: #fff;
     --color-background: #2D2D2D;
     --color-background-overlay: rgba(45, 45, 45);
@@ -71,6 +73,10 @@ img {
 
 .highlight--red {
     color: var(--color-highlight-red);
+}
+
+.highlight--blue {
+    color: var(--color-highlight-blue);
 }
 
 .debug-info {
@@ -364,12 +370,14 @@ html[data-theme="dark"] .dummy-button--mode svg:first-child {
 .tooltip__button svg {
     width: 20px;
     height: 20px;
+    fill: var(--color-text);
 }
 
 .tooltip__content {
     display: flex;
     flex-direction: row;
     background-color: #D9D9D9;
+    color: #2D2D2D;
     position: absolute;
     bottom: 5px;
     right: 0;
@@ -450,7 +458,7 @@ ul.overlay__content-detour-wrapper li {
 }
 
 .overlay__content-departures-detail-info,
-.overlay__content-detour-type,
+.overlay__content-detour-short-info,
 .overlay__content-detour-info {
     font-size: 14px;
 }
@@ -469,14 +477,20 @@ ul.overlay__content-detour-wrapper li {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    color: var(--color-text);
+}
+
+.overlay__content-detour-header svg path {
+    stroke: var(--color-text);
 }
 
 .overlay__content-detour-header.open svg {
     transform: rotate(180deg);
 }
 
-.overlay__content-detour-type {
+.overlay__content-detour-short-info {
     color: var(--color-highlight-red);
+    margin-top: 10px;
 }
 
 .overlay__content-detour-line {
@@ -497,6 +511,25 @@ ul.overlay__content-detour-wrapper li {
     height: 0;
     padding: 0;
     border-top: none;
+}
+
+.detour-line-type--tram,
+.detour-line-type--bus {
+    margin-left: 5px;
+    font-size: 14px;
+    padding: 5px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: var(--color-background);
+}
+
+.detour-line-type--tram {
+    background-color: var(--color-highlight-red);
+}
+
+.detour-line-type--bus {
+    background-color: var(--color-highlight-blue);
+    border-radius: 50%;
 }
 
 /**********************************  Tutorial Overlay  **********************************************/

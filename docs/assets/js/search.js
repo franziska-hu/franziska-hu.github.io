@@ -161,8 +161,11 @@ function getRouteChangesHtml(routeChanges) {
             <li>
                 <button class="overlay__content-detour-header">
                     <div>
-                    <div class="overlay__content-detour-line">${route.line}</div>
-                    <div class="overlay__content-detour-type">${route.type}</div>
+                        <div class="overlay__content-detour-line">
+                            ${route.line}
+                            <span class="detour-line-type--${route.type}">${route.type}</span>
+                        </div>
+                        <div class="overlay__content-detour-short-info">${route.short}</div>
                     </div>
 
                     <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">

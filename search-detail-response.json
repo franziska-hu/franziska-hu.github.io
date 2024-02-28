@@ -22,17 +22,20 @@
                 "routeChanges": [
                     {
                         "line": 6,
-                        "type": " ",
+                        "type": "tram",
+                        "short": " ",
                         "description": "<div>Umleitung <span class=\"highlight--red\">nur in Richtiung Wölfnitz</span> zwischen den Haltestellen Ludwig-Hartmann-Straße und Blasewitzer/Fetscherstraße über die Haltestellen <span class=\"underline\">Pohlandplatz - Spenerstraße - Fetscherplatz - Comeniusplatz - Krankenhaus St. Joseph-Stift</span>.</div>"
                     },
                     {
                         "line": 12,
-                        "type": " ",
+                        "type": "tram",
+                        "short": " ",
                         "description": "<div>Umleitung <span class=\"highlight--red\">nur in Richtung Leutewitz</span> zwischen den Haltestellen Ludwig-Hartmann-Straße und Fetscherplatz über die Haltestellen Altenberger Straße – <span class=\"underline\">Pohlandplatz – Spenerstraße</span>.</div>"
                     },
                     {
                         "line": 4,
-                        "type": "verkürzte Linienführung",
+                        "type": "tram",
+                        "short": "verkürzte Linienführung",
                         "description": "<div>Laubegast – Postplatz – Mickten – <span class=\"underline\">Forststraße</span> – Radebeul Ost.</div>"
                     }
                 ],
@@ -96,12 +99,14 @@
                 "routeChanges": [
                     {
                         "line": 65,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung in beiden Richtungen zwischen den Haltestellen S-Bf. Dobritz und Rathaus Leuben über den Fahrweg <span class=\"underline\">über Moränenende – Wilhelm-Liebknecht-Straße – Breitscheidstraße – Robert-Berndt-Straße – Hertzstraße</span>.</div>"
                     },
                     {
                         "line": 85,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung nur <span class=\"highlight--red\">in Richtung Löbtau/Reick</span> zwischen den Haltestellen Schneebergstraße und Grunaer Weg <span class=\"underline\">über die Nebenfahrbahn Zwinglistraße</span>.</div>"
                     }
                 ],
@@ -161,7 +166,8 @@
                 "routeChanges": [
                     {
                         "line": 4,
-                        "type": "verkürzte Linienführung",
+                        "type": "tram",
+                        "short": "verkürzte Linienführung",
                         "description": "<div>Laubegast – Postplatz – Mickten – <span class=\"underline\">Forststraße</span> – Radebeul Ost.</div>"
                     }
                 ],
@@ -279,12 +285,14 @@
                 "routeChanges": [
                     {
                         "line": 85,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung nur <span class=\"highlight--red\">in Richtung Löbtau/Reick</span> zwischen den Haltestellen Schneebergstraße und Grunaer Weg <span class=\"underline\">über die Nebenfahrbahn Zwinglistraße</span>.</div>"
                     },
                     {
                         "line": 65,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung in beiden Richtungen zwischen den Haltestellen S-Bf. Dobritz und Rathaus Leuben über den Fahrweg <span class=\"underline\">über Moränenende – Wilhelm-Liebknecht-Straße – Breitscheidstraße – Robert-Berndt-Straße – Hertzstraße</span>.</div>"
                     }
                 ],
@@ -336,7 +344,8 @@
                 "routeChanges": [
                     {
                         "line": 85,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung nur <span class=\"highlight--red\">in Richtung Löbtau/Reick</span> zwischen den Haltestellen Schneebergstraße und Grunaer Weg <span class=\"underline\">über die Nebenfahrbahn Zwinglistraße</span>.</div>"
                     }
                 ],
@@ -396,7 +405,8 @@
                 "routeChanges": [
                     {
                         "line": 85,
-                        "type": " ",
+                        "type": "bus",
+                        "short": " ",
                         "description": "<div>Umleitung nur <span class=\"highlight--red\">in Richtung Löbtau/Reick</span> zwischen den Haltestellen Schneebergstraße und Grunaer Weg <span class=\"underline\">über die Nebenfahrbahn Zwinglistraße</span>.</div>"
                     }
                 ],

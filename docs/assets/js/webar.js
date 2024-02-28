@@ -134,13 +134,10 @@ function calculateDistance(object) {
   let displayDistance = object.querySelector('.object-distance');
   displayDistance.setAttribute('value', Math.round(distance) + " m entfernt");
 
-  if (distance < minDistanceForScaling) return;
 
   let scalingFactor = distance * 0.05;
   object.setAttribute('scale', {x: scalingFactor, y: scalingFactor, z: 1});
 }
-
-
 
 /**************************************************************************************************************/
 /**********************************     Haltestellenauskunft     **********************************************/
@@ -215,7 +212,9 @@ function getBoxesForDeparture(depatures) {
     <a-text
       value="${depatures[0].lineName}   ${depatures[0].direction}"
       text="width: 8; color: black;"
-      position="0.5 -3.2 0"
+      position="0.5 -2.9 0"
+      font="docs/assets/font/custom-msdf.json"
+      negate="false"
     >
     </a-text>
 
@@ -223,14 +222,16 @@ function getBoxesForDeparture(depatures) {
       class="departure-time"
       value="-"
       text="width: 8; color: black;"
-      position="6 -3.2 0"
+      position="6 -2.9 0"
     >
     </a-text>
 
     <a-text
       value="${depatures[1].lineName}   ${depatures[1].direction}"
       text="width: 8; color: black;"
-      position="0.5 -3.7 0"
+      position="0.5 -3.4 0"
+      font="docs/assets/font/custom-msdf.json"
+      negate="false"
     >
     </a-text>
 
@@ -238,14 +239,16 @@ function getBoxesForDeparture(depatures) {
       class="departure-time"
       value="-"
       text="width: 8; color: black;"
-      position="6 -3.7 0"
+      position="6 -3.4 0"
     >
     </a-text>
 
     <a-text
       value="${depatures[2].lineName}   ${depatures[2].direction}"
       text="width: 8; color: black;"
-      position="0.5 -4.2 0"
+      position="0.5 -3.9 0"
+      font="docs/assets/font/custom-msdf.json"
+      negate="false"
     >
     </a-text>
 
@@ -253,7 +256,7 @@ function getBoxesForDeparture(depatures) {
       class="departure-time"
       value="-"
       text="width: 8; color: black;"
-      position="6 -4.2 0"
+      position="6 -3.9 0"
     >
     </a-text>
   `
@@ -317,17 +320,17 @@ function createInfoBox(dataBoxes) {
             <a-entity position="-4 5 1">
               <a-text
                 value="${stopName}"
-                text="align: right; width: 10; color: black;"
-                font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
-                position="5 -0.8 0"
+                text="align: left; width: 10; color: black;"
+                font="docs/assets/font/custom-msdf.json"
+                negate="false"
+                position="0.5 -0.5 0"
               >
               </a-text>
               
               <a-text
                 value="${platformNumber}"
                 text="width: 10; color: black;"
-                font="https://cdn.aframe.io/fonts/Exo2Bold.fnt"
-                position="0.5 -1.5 0"
+                position="0.5 -1.2 0"
               >
               </a-text>
 
@@ -335,21 +338,29 @@ function createInfoBox(dataBoxes) {
                 class="object-distance"
                 value=""
                 text="width: 8; color: black;"
-                position="0.5 -2.2 0"
+                position="0.5 -1.9 0"
               >
               </a-text>
 
               ${depatureMarkup}
 
+              <a-text
+                class="object-distance"
+                value="+ mehr Details"
+                text="width: 8; color: black;"
+                position="3 -4.7 0"
+              >
+              </a-text>
+
             </a-entity>
 
-            <a-sphere position="0 0 0" color="#FDC300" radius="0.5"></a-sphere>
+            <a-sphere position="0 -0.5 0" color="#FDC300" radius="0.5"></a-sphere>
 
             <a-box
               color="white"
               position="0 2.5 -1"
               width="8"
-              height="5"
+              height="6"
               data-name="${stopName} ${platformNumber}"
               data-overlayinitialized="false"
               cursor-listener

@@ -15,10 +15,11 @@ function calculateDelayInMinutes(date1, date2) {
     let delayMiniutes = delayMilliseconds / 60000; // calculate in Miniutes
 
     if (delayMiniutes < 0) {
+        delayMiniutes = Math.abs(delayMiniutes);
         return `<span class="highlight--red">+ ${delayMiniutes} min</span>`;
     }
     
-    return `<span class="highlight--blue">${delayMiniutes} min</span>`
+    return `<span class="highlight--blue">- ${delayMiniutes} min</span>`
 }
 
 function calculateTimeDifferenceInMinutes(time) {

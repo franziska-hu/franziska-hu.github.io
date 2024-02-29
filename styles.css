@@ -46,6 +46,12 @@ h1 {
     position: absolute;
 }
 
+h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 6px;
+}
+
 svg {
     fill: currentColor;
 }
@@ -77,6 +83,10 @@ img {
 
 .highlight--blue {
     color: var(--color-highlight-blue);
+}
+
+.underline {
+    text-decoration: underline;
 }
 
 .debug-info {
@@ -692,4 +702,101 @@ ul.overlay__content-detour-wrapper li {
 .help-box button {
     background-color: transparent;
     border: none;
+}
+
+/************************************************************************************************/
+/**********************************    Search Page    *******************************************/
+/************************************************************************************************/
+
+.stop-information-box {
+    background-color: var(--color-background);
+    border-radius: var(--border-radius);
+    left: 0;
+    margin: 20px 20px 0;
+    max-width: 500px;
+    position: absolute;
+    right: 0;
+    z-index: 10;
+}
+
+.stop-information-box__header {
+    padding: 15px;
+    width: 100%;
+    font-size: inherit;
+    text-align: left;
+    background-color: var(--color-primary);
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.stop-information-box__header.open {
+    border-radius: 5px 5px 0 0;
+}
+
+.stop-information-box__header.open svg {
+    transform: rotate(180deg);
+}
+
+.stop-information-box__content {
+    padding: 15px;
+}
+
+.stop-information-box__content.hide {
+    overflow: hidden;
+    height: 0;
+    padding: 0;
+}
+
+.stop-information-box__departures {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
+.stop-information-box__departures li {
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 5px;
+}
+
+a.button {
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #2D2D2D;
+}
+
+.detail-button__wrapper {
+    text-align: center;
+}
+
+.detail-button {
+    background-color: var(--color-primary);
+    border: none;
+    height: 30px;
+    margin: 15px 0 0;
+    border-radius: 5px;
+    padding: 0 15px;
+}
+
+.search-button__wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 20px 25px;
+    text-align: center;
+    z-index: 10;
+}
+
+.search-button {
+    background-color: var(--color-primary);
+}
+
+.pin-distance--wrapper.hide {
+    display: none;
 }

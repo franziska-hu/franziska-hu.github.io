@@ -356,7 +356,7 @@ function createInfoBox(dataBoxes) {
 
             <a-sphere position="0 -0.5 0" color="#FDC300" radius="0.5"></a-sphere>
 
-            <a-box
+            <a-plane
               color="white"
               position="0 2.5 -1"
               width="8"
@@ -365,7 +365,7 @@ function createInfoBox(dataBoxes) {
               data-overlayinitialized="false"
               cursor-listener
             >
-            </a-box>
+            </a-plane>
 
             <div class="overlay">
             </div>
@@ -377,7 +377,7 @@ function createInfoBox(dataBoxes) {
     })
   })
 
-  intervalId = setInterval(updateBoxDisplay, 10000);
+  intervalId = setInterval(updateBoxDisplay, 3000);
 
   setTimeout(() => {
     updateBoxDisplay();
@@ -430,16 +430,17 @@ window.addEventListener("DOMContentLoaded", (event) => {
     closeButton.addEventListener('click', (event) => {
       overlay.classList.remove('open');
     })
-  })
+  });
 
   helpboxes.forEach(box => {
     let checkButton = box.querySelector('button');
 
     checkButton.addEventListener('click', function() {
       box.classList.add('hidden');
+      localStorage.setItem('visited', 'true');
 
       // show second helpbox if first help box checked by user
-      if (box.classList.contains('help-box--step-1')) {
+      if (box.classList.contains('help-box--step-1') && localStorage.getItem('clickedBox') !== 'true') {
         setTimeout(() => {
           document.querySelector('.help-box--step-2').classList.remove('hidden');
         }, "10000");
@@ -447,11 +448,12 @@ window.addEventListener("DOMContentLoaded", (event) => {
     })
   });
 
-  // show first helpbox after 10 seconds
-  setTimeout(() => {
-    helpbox1.classList.remove('hidden');
-  }, "10000");
-
+  if (localStorage.getItem('visited') !== 'true') {
+    // show first helpbox after 10 seconds
+    setTimeout(() => {
+      helpbox1.classList.remove('hidden');
+    }, "10000");
+  }
 });
 
 // Clean up

@@ -1,6 +1,3 @@
-
-let clicked = false;
-
 /**************************************************************************************************************/
 /**********************************     Haltestellenauskunft     **********************************************/
 /**************************************************************************************************************/
@@ -48,7 +45,7 @@ function getLinesHtml(lines) {
     return markup;
 }
 
-function getDeparturesHtml(depatures) {
+function getDepartureHtml(depatures) {
     let markup = '';
   
     if (depatures.length === 0) {
@@ -140,7 +137,7 @@ function getOverlay(data) {
     }
 
     let lineMarkup = getLinesHtml(data.lines);
-    let departureMarkup = getDeparturesHtml(data.departures, true);
+    let departureMarkup = getDepartureHtml(data.departures, true);
 
     overlay = `
         <div class="overlay__header">
@@ -200,67 +197,96 @@ function getOverlay(data) {
     return overlay;
 }
 
-function handleOverlay(dataDepartures, box) {
-    if (box.dataset.overlayinitialized === "false") {
-        const stop = box.dataset.name;
-        let overlay = box.nextElementSibling;
-    
-        let info = dataDepartures.data.dmDepartures.find(e => e.name.includes(stop));
-    
-    
-        let overlayMarkup  = getOverlay(info);
-        console.log(overlay)
-    
-        overlay.insertAdjacentHTML('afterbegin', overlayMarkup);
-    
-        // set event listeners
-        let overlayCloseButton = overlay.querySelector('.overlay .overlay__header-close-button');
-    
-        overlayCloseButton.addEventListener('click', function() {
-            box.nextElementSibling.classList.remove('open');
-        });
-    
-        let accordionButtons = overlay.querySelectorAll('.overlay__content-detour-header');
-    
-        accordionButtons.forEach(button => {
-            button.addEventListener('click', function() {
+function createOverlay(dataDepartures, stopName, overlayWrapper) {
+    let info = dataDepartures.data.dmDepartures.find(e => e.name.includes(stopName));
+    let overlayMarkup  = getOverlay(info);
+
+    overlayWrapper.insertAdjacentHTML('afterbegin', overlayMarkup);
+
+    // set event listeners
+    let overlayCloseButton = overlayWrapper.querySelector('.overlay .overlay__header-close-button');
+    let accordionButtons = overlayWrapper.querySelectorAll('.overlay__content-detour-header');
+    let tooltipButton = overlayWrapper.querySelector('.tooltip__button');
+    let tooltipHint = tooltipButton.nextElementSibling;
+
+    overlayCloseButton.addEventListener('click', function() {
+        overlayWrapper.classList.remove('open');
+    });
+
+    accordionButtons.forEach(button => {
+        button.addEventListener('click', function() {
             button.nextElementSibling.classList.toggle('hide');
             button.classList.toggle('open');
-            });
         });
+    });
 
-        let tooltipButton = overlay.querySelector('.tooltip__button');
+    tooltipButton.addEventListener('click', function() {
+        tooltipHint.classList.toggle('hidden');
+    });
 
-        tooltipButton.addEventListener('click', function(event) {
-            tooltipButton.nextElementSibling.classList.toggle('hidden');
-        });
-
-        box.dataset.overlayinitialized = "true";
-    }
-
-    box.nextElementSibling.classList.add('open');
-    clicked = false;
+    overlayWrapper.addEventListener('click', function(event) {
+        // listen for clicks outside tooltip
+        if (!tooltipHint.contains(event.target) && !tooltipButton.contains(event.target)) {
+            tooltipHint.classList.add('hidden');
+        }
+    });
 }
 
-function initOverlay(box) {
-    fetch('./data-detail.json')
-    .then((response) => response.json())
-    .then((json) => handleOverlay(json, box));
-}
+/*****************************************************************************************/
+/*************************      Location Page Overlay         ****************************/
+/*****************************************************************************************/
+let clicked = false;
 
+function initOverlayForLocation(data, box) {
+    let stop = box.dataset.name;
+    let overlay = box.nextElementSibling;
+
+    createOverlay(data, stop, overlay);
+
+    box.dataset.overlayinitialized = "true";
+}
 
 AFRAME.registerComponent('cursor-listener', {
     init: function() {
       var el = this.el;
 
-      el.addEventListener('click', function(event) {
+      el.addEventListener('click', function() {
         if (!clicked) {
             clicked = true;
-            initOverlay(el);
+            localStorage.setItem('clickedBox', 'true');
+            if (el.dataset.overlayinitialized === "false") {
+                fetch('./data-detail.json')
+                .then((response) => response.json())
+                .then((json) => initOverlayForLocation(json, el));
+            }
+
+            el.nextElementSibling.classList.add('open');
+
+            // prevent multi click on boxes (click on box triggers multiple click-events -> reason not yet discovered)
+            setTimeout(() => {
+                clicked = false;
+            }, "500");
         }
       });
     }
 });
 
+/*****************************************************************************************/
+/*************************      Search Page Overlay         ******************************/
+/*****************************************************************************************/
 
+function initOverlayForSearch(data) {
+    const stop = new URLSearchParams(window.location.search).get('stop');
+    let overlay = document.querySelector('.overlay--detail');
 
+    createOverlay(data, stop, overlay);
+}
+
+window.addEventListener("DOMContentLoaded", (event) => {
+    if (!document.querySelector('.stop-information-box')) return;
+    console.log('search trigger');
+
+    fetch('./search-detail-response.json')
+    .then((response) => response.json())
+    .then((json) => initOverlayForSearch(json));
+});

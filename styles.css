@@ -113,6 +113,14 @@ img {
     }
 }
 
+@media (orientation: landscape) {
+    .wrapper--horizontal-view {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
 /**************************************************************************************************************/
 /**********************************    Controls, Button Toggle   **********************************************/
 /**************************************************************************************************************/
@@ -433,7 +441,7 @@ ul.overlay__content-detour-wrapper li {
 .overlay_content-depatures-header {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0 5px;
+    margin: 20px 0 13px;
     align-items: center;
 }
 

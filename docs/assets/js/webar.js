@@ -44,7 +44,7 @@ function switchTheme(theme) {
   document.querySelector('html').setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
 
-  let infoboxes = document.querySelectorAll("a-box");
+  let infoboxes = document.querySelectorAll("a-plane");
   let textElements = document.querySelectorAll("a-text");
 
   if (theme === 'dark') {

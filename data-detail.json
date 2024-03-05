@@ -3,8 +3,9 @@
         "dmDepartures": [
             {
                 "name": "Altenberger Straße Steig 1",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 1",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 6,
@@ -84,8 +85,9 @@
             },
             {
                 "name": "Altenberger Straße Steig 2",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 2",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 85,
@@ -155,8 +157,9 @@
             },
             {
                 "name": "Altenberger Straße Steig 3",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 3",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 4,
@@ -216,8 +219,9 @@
             },
             {
                 "name": "Altenberger Straße Steig 4",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 4",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 87,
@@ -270,8 +274,9 @@
             },
             {
                 "name": "Altenberger Straße Steig 5",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 5",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 85,
@@ -341,16 +346,18 @@
             },
             {
                 "name": "Altenberger Straße Steig 6",
+                "stop": "Altenberger Straße",
                 "platform": "Steig 6",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Bärensteiner Straße Steig 1",
+                "stop": "Bärensteiner Straße",
                 "platform": "Steig 1",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 85,
@@ -410,8 +417,9 @@
             },
             {
                 "name": "Bärensteiner Straße Steig 2",
+                "stop": "Bärensteiner Straße",
                 "platform": "Steig 2",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 85,
@@ -471,8 +479,9 @@
             },          
             {
                 "name": "Meine Testhaltestelle Steig 1",
+                "stop": "Meine Testhaltestelle",
                 "platform": "Steig 1",
-                "accessible": false,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 789,
@@ -533,8 +542,9 @@
             },
             {
                 "name": "Meine Testhaltestelle Steig 2",
+                "stop": "Meine Testhaltestelle",
                 "platform": "Steig 2",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 123,
@@ -595,8 +605,9 @@
             },
             {
                 "name": "Deutsches Hygiene-Museum Steig 1",
+                "stop": "Deutsches Hygiene-Museum",
                 "platform": "Steig 1",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 1,
@@ -657,8 +668,9 @@
             },
             {
                 "name": "Deutsches Hygiene-Museum Steig 2",
+                "stop": "Deutsches Hygiene-Museum",
                 "platform":"Steig 2",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 2,
@@ -719,24 +731,27 @@
             },
             {
                 "name": "Deutsches Hygiene-Museum Steig 91",
+                "stop": "Deutsches Hygiene-Museum",
                 "platform":"Steig 91",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Deutsches Hygiene-Museum Steig 92",
+                "stop": "Deutsches Hygiene-Museum",
                 "platform":"Steig 92",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Pirnaischer Platz Steig 1",
+                "stop": "Pirnaischer Platz",
                 "platform":"Steig 1",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 1,
@@ -781,8 +796,9 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 2",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 2",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 2,
@@ -827,8 +843,9 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 3",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 3",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 3,
@@ -877,8 +894,9 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 4",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 4",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 3,
@@ -927,16 +945,18 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 5",
+                "stop": "Pirnaischer Platz",
                 "platform":"Steig 5",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Pirnaischer Platz Steig 6",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 6",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 360,
@@ -948,8 +968,9 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 7",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 7",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 261,
@@ -961,24 +982,27 @@
             },
             {
                 "name": "Pirnaischer Platz Steig 8",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 8",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Pirnaischer Platz Steig 9",
+                "stop": "Pirnaischer Platz",
                 "platform": "Steig 9",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [],
                 "routeChanges": [],
                 "departures": []
             },
             {
                 "name": "Hebbelplatz Steig 1",
+                "stop": "Hebbelplatz",
                 "platform": "Steig 1",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 1,
@@ -1023,8 +1047,9 @@
             },
             {
                 "name": "Hebbelplatz Steig 2",
+                "stop": "Hebbelplatz",
                 "platform": "Steig 2",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 2,
@@ -1069,8 +1094,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 1",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 1",
-                "accessible": true,
+                "accessible": "true",
                 "lines": [
                     {
                         "line": 1,
@@ -1115,8 +1141,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 2",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 2",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 2,
@@ -1161,8 +1188,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 3",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 3",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 8,
@@ -1203,8 +1231,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 4",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 4",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 8,
@@ -1245,8 +1274,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 5",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 5",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 360,
@@ -1262,8 +1292,9 @@
             },
             {
                 "name": "Hauptbahnhof Steig 6",
+                "stop": "Hauptbahnhof",
                 "platform": "Steig 6",
-                "accessible": false,
+                "accessible": "false",
                 "lines": [
                     {
                         "line": 360,

@@ -352,6 +352,21 @@ html[data-theme="dark"] .dummy-button--mode svg:first-child {
 
 /**********************************  Detail Page  **********************************************/
 
+.overlay__header-platform {
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.overlay__header-platform svg {
+    margin-left: 15px;
+}
+
+.overlay__header-platform svg.accessible--false {
+    display: none;
+}
+
 .overlay__content-lines-wrapper {
     display: flex;
 }

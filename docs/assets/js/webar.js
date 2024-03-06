@@ -135,7 +135,7 @@ function calculateDistance(object) {
   displayDistance.setAttribute('value', Math.round(distance) + " m entfernt");
 
 
-  let scalingFactor = distance * 0.05;
+  let scalingFactor = distance * 0.1;
   object.setAttribute('scale', {x: scalingFactor, y: scalingFactor, z: 1});
 }
 
